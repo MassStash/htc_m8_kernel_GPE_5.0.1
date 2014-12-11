@@ -77,19 +77,19 @@ echo
 echo
 echo
 echo " Moved zImage "
-cp arch/arm/boot/zImage /home/zaichron-lin/Desktop/Copy/AndroidDev/Kernz/m8/Hypernova-GPE-5.0.1
+cp arch/arm/boot/zImage /home/zaichron-lin/Desktop/Copy/AndroidDev/Kernz/m8/ElementalX-GPE-5.0.1
 
 echo
 echo
 echo " Moved dt.img "
-cp arch/arm/boot/dt.img /home/zaichron-lin/Desktop/Copy/AndroidDev/Kernz/m8/Hypernova-GPE-5.0.1/dtb
+cp arch/arm/boot/dt.img /home/zaichron-lin/Desktop/Copy/AndroidDev/Kernz/m8/ElementalX-GPE-5.0.1/dtb
 
 echo
 echo
 echo " Moving modules "
-find -iname *.ko | xargs cp -t /home/zaichron-lin/Desktop/Copy/AndroidDev/Kernz/m8/Hypernova-GPE-5.0.1/system/lib/modules
+find -iname *.ko | xargs cp -t /home/zaichron-lin/Desktop/Copy/AndroidDev/Kernz/m8/ElementalX-GPE-5.0.1/system/lib/modules
 
-cd /home/zaichron-lin/Desktop/Copy/AndroidDev/Kernz/m8/Hypernova-GPE-5.0.1
+cd /home/zaichron-lin/Desktop/Copy/AndroidDev/Kernz/m8/ElementalX-GPE-5.0.1
 
 echo
 echo
