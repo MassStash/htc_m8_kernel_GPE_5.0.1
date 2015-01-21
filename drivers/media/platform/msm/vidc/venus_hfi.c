@@ -1932,6 +1932,7 @@ static int venus_hfi_core_release(void *device)
 	}
 
 	if (dev->hal_client) {
+		cancel_delayed_work_sync(&venus_hfi_pm_work);
 		mutex_lock(&dev->clk_pwr_lock);
 		rc = venus_hfi_clk_gating_off(device);
 		if (rc) {
