@@ -567,7 +567,6 @@ CONFIG_CIFS_STATS=y
 # CONFIG_CIFS_ACL is not set
 # CONFIG_CIFS_NFSD_EXPORT is not set
 
->>>>>>> e8ac391... Delete duplicate defconfig flags
 #
 # HTC Debugging Features
 #
