@@ -3945,7 +3945,7 @@ static bool update_sd_pick_busiest(struct sched_domain *sd,
  * @sds: variable to hold the statistics for this sched_domain.
  */
 static inline void update_sd_lb_stats(struct sched_domain *sd, int this_cpu,
-			enum cpu_idle_type idle, const struct cpumask *cpus,
+			enum cpu_idle_type idle, struct lb_env *env, const struct cpumask *cpus,
 			int *balance, struct sd_lb_stats *sds)
 {
 	struct sched_domain *child = sd->child;
@@ -4230,7 +4230,7 @@ static inline void calculate_imbalance(struct sd_lb_stats *sds, int this_cpu,
 static struct sched_group *
 find_busiest_group(struct sched_domain *sd, int this_cpu,
 		   unsigned long *imbalance, enum cpu_idle_type idle,
-		   const struct cpumask *cpus, int *balance)
+		   struct lb_env *env, const struct cpumask *cpus, int *balance)
 {
 	struct sd_lb_stats sds;
 
@@ -4240,7 +4240,7 @@ find_busiest_group(struct sched_domain *sd, int this_cpu,
 	 * Compute the various statistics relavent for load balancing at
 	 * this level.
 	 */
-	update_sd_lb_stats(sd, this_cpu, idle, cpus, balance, &sds);
+	update_sd_lb_stats(sd, this_cpu, idle, env, cpus, balance, &sds);
 
 	/*
 	 * this_cpu is not the appropriate cpu to perform load balancing at
@@ -4326,7 +4326,7 @@ ret:
  * find_busiest_queue - find the busiest runqueue among the cpus in group.
  */
 static struct rq *
-find_busiest_queue(struct sched_domain *sd, struct sched_group *group,
+find_busiest_queue(struct sched_domain *sd, struct lb_env *env, struct sched_group *group,
 		   enum cpu_idle_type idle, unsigned long imbalance,
 		   const struct cpumask *cpus)
 {
@@ -4452,7 +4452,7 @@ static int load_balance(int this_cpu, struct rq *this_rq,
 
 redo:
 	group = find_busiest_group(sd, this_cpu, &imbalance, idle,
-				   cpus, balance);
+				   &env, cpus, balance);
 
 	if (*balance == 0)
 		goto out_balanced;
@@ -4462,7 +4462,7 @@ redo:
 		goto out_balanced;
 	}
 
-	busiest = find_busiest_queue(sd, group, idle, imbalance, cpus);
+	busiest = find_busiest_queue(sd, &env, group, idle, imbalance, cpus);
 	if (!busiest) {
 		schedstat_inc(sd, lb_nobusyq[idle]);
 		goto out_balanced;
